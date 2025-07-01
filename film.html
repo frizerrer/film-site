@@ -1,244 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Фильм</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Подробности о фильме</title>
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
+  <header class="site-header">
+    <h1>КиноМир</h1>
+    <nav>
+      <a href="./index.html">Главная</a>
+    </nav>
+  </header>
   <div class="container">
-    <a href="index.html">← Назад</a>
-    <div id="film"></div>
+    <a href="./index.html" class="back-link">← Назад к каталогу</a>
+    <div class="film-detail" id="filmDetail">
+      <h1>Подробности о фильме</h1>
+      <p>Выберите фильм на главной странице, чтобы увидеть подробную информацию.</p>
+    </div>
   </div>
-
+  <footer class="site-footer">
+    <div class="footer-content">
+      <h3>О КиноМир</h3>
+      <p>КиноМир — ваш проводник в мир кинематографа! Откройте для себя лучшие фильмы, от классики до современных шедевров.</p>
+      <p>Контакт: <a href="mailto:info@kinomir.ru">info@kinomir.ru</a></p>
+    </div>
+  </footer>
+  <script src="./data.js"></script>
   <script>
-    const data = [
-      {
-        "id": 0,
-        "title": "Интерстеллар",
-        "genre": "Фантастика",
-        "year": 2014,
-        "director": "Кристофер Нолан",
-        "poster": "images/movie1.jpg",
-        "directorPhoto": "images/director1.jpg",
-        "actors": [
-          { "name": "Мэттью МакКонахи", "photo": "images/actor1.jpg" },
-          { "name": "Энн Хэтэуэй", "photo": "images/actor2.jpg" }
-        ],
-        "description": "Космическая одиссея о спасении человечества через путешествия по червоточинам."
-      },
-      {
-    "id": 1,
-    "title": "Начало",
-    "genre": "Фантастика, Триллер",
-    "year": 2010,
-    "director": "Кристофер Нолан",
-    "poster": "images/movie2.jpg",
-    "directorPhoto": "images/director1.jpg",
-    "actors": [
-      {
-        "name": "Леонардо Ди Каприо",
-        "photo": "images/actor3.jpg"
-      },
-      {
-        "name": "Том Харди",
-        "photo": "images/actor4.jpg"
-      }
-    ],
-    "description": "Команда воров проникает в сны людей, чтобы украсть или внедрить идеи."
-  },
-  {
-    "id": 2,
-    "title": "Матрица",
-    "genre": "Фантастика, Боевик",
-    "year": 1999,
-    "director": "Лана Вачовски, Лилли Вачовски",
-    "poster": "images/movie3.jpg",
-    "directorPhoto": "images/director2.jpg",
-    "actors": [
-      {
-        "name": "Киану Ривз",
-        "photo": "images/actor5.jpg"
-      },
-      {
-        "name": "Кэрри-Энн Мосс",
-        "photo": "images/actor6.jpg"
-      }
-    ],
-    "description": "Офисный работник узнаёт, что его мир — симуляция, и он избранный."
-  },
-  {
-    "id": 3,
-    "title": "Бойцовский клуб",
-    "genre": "Драма, Триллер",
-    "year": 1999,
-    "director": "Дэвид Финчер",
-    "poster": "images/movie4.jpg",
-    "directorPhoto": "images/director3.jpg",
-    "actors": [
-      {
-        "name": "Эдвард Нортон",
-        "photo": "images/actor7.jpg"
-      },
-      {
-        "name": "Брэд Питт",
-        "photo": "images/actor8.jpg"
-      }
-    ],
-    "description": "Мужчина находит выход из рутины через подпольные бои и анархию."
-  },
-  {
-    "id": 4,
-    "title": "Форрест Гамп",
-    "genre": "Драма, Комедия",
-    "year": 1994,
-    "director": "Роберт Земекис",
-    "poster": "images/movie5.jpg",
-    "directorPhoto": "images/director4.jpg",
-    "actors": [
-      {
-        "name": "Том Хэнкс",
-        "photo": "images/actor9.jpg"
-      },
-      {
-        "name": "Робин Райт",
-        "photo": "images/actor10.jpg"
-      }
-    ],
-    "description": "История жизни простодушного, но доброго Форреста, ставшего свидетелем важнейших событий века."
-  },
-  {
-    "id": 5,
-    "title": "Побег из Шоушенка",
-    "genre": "Драма",
-    "year": 1994,
-    "director": "Фрэнк Дарабонт",
-    "poster": "images/movie6.jpg",
-    "directorPhoto": "images/director5.jpg",
-    "actors": [
-      {
-        "name": "Тим Роббинс",
-        "photo": "images/actor11.jpg"
-      },
-      {
-        "name": "Морган Фриман",
-        "photo": "images/actor12.jpg"
-      }
-    ],
-    "description": "История банковского служащего, приговорённого к пожизненному заключению за убийство, которого он не совершал."
-  },
-  {
-    "id": 6,
-    "title": "Темный рыцарь",
-    "genre": "Боевик, Триллер",
-    "year": 2008,
-    "director": "Кристофер Нолан",
-    "poster": "images/movie7.jpg",
-    "directorPhoto": "images/director1.jpg",
-    "actors": [
-      {
-        "name": "Кристиан Бейл",
-        "photo": "images/actor13.jpg"
-      },
-      {
-        "name": "Хит Леджер",
-        "photo": "images/actor14.jpg"
-      }
-    ],
-    "description": "Бэтмен противостоит Джокеру, преступнику, сеющему хаос в Готэме."
-  },
-  {
-    "id": 7,
-    "title": "Зелёная миля",
-    "genre": "Драма, Фэнтези",
-    "year": 1999,
-    "director": "Фрэнк Дарабонт",
-    "poster": "images/movie8.jpg",
-    "directorPhoto": "images/director5.jpg",
-    "actors": [
-      {
-        "name": "Том Хэнкс",
-        "photo": "images/actor9.jpg"
-      },
-      {
-        "name": "Майкл Кларк Дункан",
-        "photo": "images/actor15.jpg"
-      }
-    ],
-    "description": "Тюремный надзиратель сталкивается с необычным заключённым, обладающим даром исцеления."
-  },
-  {
-    "id": 8,
-    "title": "Пираты Карибского моря",
-    "genre": "Приключения, Фэнтези",
-    "year": 2003,
-    "director": "Гор Вербински",
-    "poster": "images/movie9.jpg",
-    "directorPhoto": "images/director6.jpg",
-    "actors": [
-      {
-        "name": "Джонни Депп",
-        "photo": "images/actor16.jpg"
-      },
-      {
-        "name": "Орландо Блум",
-        "photo": "images/actor17.jpg"
-      }
-    ],
-    "description": "Пират Джек Воробей пускается в опасные приключения ради сокровищ и свободы."
-  },
-  {
-    "id": 9,
-    "title": "Властелин колец: Братство кольца",
-    "genre": "Фэнтези, Приключения",
-    "year": 2001,
-    "director": "Питер Джексон",
-    "poster": "images/movie10.jpg",
-    "directorPhoto": "images/director7.jpg",
-    "actors": [
-      {
-        "name": "Элайджа Вуд",
-        "photo": "images/actor18.jpg"
-      },
-      {
-        "name": "Иэн Маккеллен",
-        "photo": "images/actor19.jpg"
-      }
-    ],
-    "description": "Фродо и его союзники начинают опасное путешествие, чтобы уничтожить Кольцо Всевластья."
-  }
-    ]
-  
-    const params = new URLSearchParams(window.location.search);
-    const filmId = parseInt(params.get("id"));
-    const film = data.find(f => f.id === filmId);
-  
-    if (!film) {
-      document.getElementById('film').innerHTML = '<p>Фильм не найден.</p>';
-    } else {
-      const html = `
-        <div class="film-card">
-          <div class="flex">
-            <img src="${film.poster}">
-            <div>
-              <h2>${film.title} (${film.year})</h2>
-              <p><b>Жанр:</b> ${film.genre}</p>
-              <p>${film.description}</p>
-              <div class="director">
-                <b>Режиссёр:</b> ${film.director}<br>
-                <img src="${film.directorPhoto}">
-              </div>
-              <div class="actor">
-                <b>Актёры:</b><br>
-                ${film.actors.map(a => `${a.name}<br><img src="${a.photo}"><br>`).join('')}
-              </div>
-            </div>
+    const urlParams = new URLSearchParams(window.location.search);
+    const movieId = urlParams.get('id');
+    const movie = movies.find(m => m.id == movieId);
+
+    if (movie) {
+      const filmDetail = document.getElementById('filmDetail');
+      filmDetail.innerHTML = `
+        <h1>${movie.title}</h1>
+        <div class="details-grid">
+          <div>
+            <img class="poster" src="${movie.poster}" alt="${movie.title}">
           </div>
-        </div>`;
-      document.getElementById('film').innerHTML = html;
+          <div>
+            <div class="genre">${movie.genre.charAt(0).toUpperCase() + movie.genre.slice(1)}</div>
+            <p class="description">${movie.description}</p>
+            <div class="details">
+              Режиссер: ${movie.director}<br>
+              Актеры: ${movie.actors.map(actor => actor.name).join(', ')}<br>
+              Год: ${movie.year}
+            </div>
+            <div class="director">
+              <img class="director-photo" src="${movie.directorPhoto}" alt="${movie.director}">
+              <span>${movie.director}</span>
+            </div>
+            ${movie.actors.map(actor => `
+              <div class="actor">
+                <img class="actor-photo" src="${actor.photo}" alt="${actor.name}">
+                <span>${actor.name}</span>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
     }
   </script>
-  
-  
 </body>
 </html>

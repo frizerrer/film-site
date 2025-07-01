@@ -1,241 +1,63 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Фильмотека</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>КиноМир - Каталог фильмов</title>
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
+  <header class="site-header">
+    <h1>КиноМир</h1>
+    <nav>
+      <a href="./index.html">Главная</a>
+    </nav>
+  </header>
   <div class="container">
-    <h1>Фильмы</h1>
-    <input type="text" id="search" placeholder="Поиск по названию...">
-    <div id="films"></div>
+    <div class="layout">
+      <aside class="sidebar">
+        <h2>Жанры</h2>
+        <ul class="genre-list">
+          <li><a href="#" data-genre="all">Все жанры</a></li>
+          <li><a href="#" data-genre="sci-fi">Фантастика</a></li>
+          <li><a href="#" data-genre="drama">Драма</a></li>
+          <li><a href="#" data-genre="action">Боевик</a></li>
+          <li><a href="#" data-genre="comedy">Комедия</a></li>
+          <li><a href="#" data-genre="adventure">Приключения</a></li>
+          <li><a href="#" data-genre="fantasy">Фэнтези</a></li>
+        </ul>
+        <div class="featured">
+          <h2>Рекомендация</h2>
+          <p>Посмотрите <a href="./film.html?id=5">"Побег из Шоушенка"</a> — вдохновляющая история о надежде и свободе!</p>
+        </div>
+      </aside>
+      <main>
+        <div class="filter-container">
+          <input type="text" id="searchInput" placeholder="Поиск по названию...">
+          <select id="genreFilter">
+            <option value="all">Все жанры</option>
+            <option value="sci-fi">Фантастика</option>
+            <option value="drama">Драма</option>
+            <option value="action">Боевик</option>
+            <option value="comedy">Комедия</option>
+            <option value="adventure">Приключения</option>
+            <option value="fantasy">Фэнтези</option>
+          </select>
+        </div>
+        <div id="moviesContainer" class="movies-grid">
+          <!-- Movie cards will be dynamically inserted here via JavaScript -->
+        </div>
+      </main>
+    </div>
   </div>
-
-  <script>
-    const data = [
-      {
-        "id": 0,
-        "title": "Интерстеллар",
-        "genre": "Фантастика",
-        "year": 2014,
-        "director": "Кристофер Нолан",
-        "poster": "images/movie1.jpg",
-        "directorPhoto": "images/director1.jpg",
-        "actors": [
-          { "name": "Мэттью МакКонахи", "photo": "images/actor1.jpg" },
-          { "name": "Энн Хэтэуэй", "photo": "images/actor2.jpg" }
-        ],
-        "description": "Космическая одиссея о спасении человечества через путешествия по червоточинам."
-      },
-      {
-    "id": 1,
-    "title": "Начало",
-    "genre": "Фантастика, Триллер",
-    "year": 2010,
-    "director": "Кристофер Нолан",
-    "poster": "images/movie2.jpg",
-    "directorPhoto": "images/director1.jpg",
-    "actors": [
-      {
-        "name": "Леонардо Ди Каприо",
-        "photo": "images/actor3.jpg"
-      },
-      {
-        "name": "Том Харди",
-        "photo": "images/actor4.jpg"
-      }
-    ],
-    "description": "Команда воров проникает в сны людей, чтобы украсть или внедрить идеи."
-  },
-  {
-    "id": 2,
-    "title": "Матрица",
-    "genre": "Фантастика, Боевик",
-    "year": 1999,
-    "director": "Лана Вачовски, Лилли Вачовски",
-    "poster": "images/movie3.jpg",
-    "directorPhoto": "images/director2.jpg",
-    "actors": [
-      {
-        "name": "Киану Ривз",
-        "photo": "images/actor5.jpg"
-      },
-      {
-        "name": "Кэрри-Энн Мосс",
-        "photo": "images/actor6.jpg"
-      }
-    ],
-    "description": "Офисный работник узнаёт, что его мир — симуляция, и он избранный."
-  },
-  {
-    "id": 3,
-    "title": "Бойцовский клуб",
-    "genre": "Драма, Триллер",
-    "year": 1999,
-    "director": "Дэвид Финчер",
-    "poster": "images/movie4.jpg",
-    "directorPhoto": "images/director3.jpg",
-    "actors": [
-      {
-        "name": "Эдвард Нортон",
-        "photo": "images/actor7.jpg"
-      },
-      {
-        "name": "Брэд Питт",
-        "photo": "images/actor8.jpg"
-      }
-    ],
-    "description": "Мужчина находит выход из рутины через подпольные бои и анархию."
-  },
-  {
-    "id": 4,
-    "title": "Форрест Гамп",
-    "genre": "Драма, Комедия",
-    "year": 1994,
-    "director": "Роберт Земекис",
-    "poster": "images/movie5.jpg",
-    "directorPhoto": "images/director4.jpg",
-    "actors": [
-      {
-        "name": "Том Хэнкс",
-        "photo": "images/actor9.jpg"
-      },
-      {
-        "name": "Робин Райт",
-        "photo": "images/actor10.jpg"
-      }
-    ],
-    "description": "История жизни простодушного, но доброго Форреста, ставшего свидетелем важнейших событий века."
-  },
-  {
-    "id": 5,
-    "title": "Побег из Шоушенка",
-    "genre": "Драма",
-    "year": 1994,
-    "director": "Фрэнк Дарабонт",
-    "poster": "images/movie6.jpg",
-    "directorPhoto": "images/director5.jpg",
-    "actors": [
-      {
-        "name": "Тим Роббинс",
-        "photo": "images/actor11.jpg"
-      },
-      {
-        "name": "Морган Фриман",
-        "photo": "images/actor12.jpg"
-      }
-    ],
-    "description": "История банковского служащего, приговорённого к пожизненному заключению за убийство, которого он не совершал."
-  },
-  {
-    "id": 6,
-    "title": "Темный рыцарь",
-    "genre": "Боевик, Триллер",
-    "year": 2008,
-    "director": "Кристофер Нолан",
-    "poster": "images/movie7.jpg",
-    "directorPhoto": "images/director1.jpg",
-    "actors": [
-      {
-        "name": "Кристиан Бейл",
-        "photo": "images/actor13.jpg"
-      },
-      {
-        "name": "Хит Леджер",
-        "photo": "images/actor14.jpg"
-      }
-    ],
-    "description": "Бэтмен противостоит Джокеру, преступнику, сеющему хаос в Готэме."
-  },
-  {
-    "id": 7,
-    "title": "Зелёная миля",
-    "genre": "Драма, Фэнтези",
-    "year": 1999,
-    "director": "Фрэнк Дарабонт",
-    "poster": "images/movie8.jpg",
-    "directorPhoto": "images/director5.jpg",
-    "actors": [
-      {
-        "name": "Том Хэнкс",
-        "photo": "images/actor9.jpg"
-      },
-      {
-        "name": "Майкл Кларк Дункан",
-        "photo": "images/actor15.jpg"
-      }
-    ],
-    "description": "Тюремный надзиратель сталкивается с необычным заключённым, обладающим даром исцеления."
-  },
-  {
-    "id": 8,
-    "title": "Пираты Карибского моря",
-    "genre": "Приключения, Фэнтези",
-    "year": 2003,
-    "director": "Гор Вербински",
-    "poster": "images/movie9.jpg",
-    "directorPhoto": "images/director6.jpg",
-    "actors": [
-      {
-        "name": "Джонни Депп",
-        "photo": "images/actor16.jpg"
-      },
-      {
-        "name": "Орландо Блум",
-        "photo": "images/actor17.jpg"
-      }
-    ],
-    "description": "Пират Джек Воробей пускается в опасные приключения ради сокровищ и свободы."
-  },
-  {
-    "id": 9,
-    "title": "Властелин колец: Братство кольца",
-    "genre": "Фэнтези, Приключения",
-    "year": 2001,
-    "director": "Питер Джексон",
-    "poster": "images/movie10.jpg",
-    "directorPhoto": "images/director7.jpg",
-    "actors": [
-      {
-        "name": "Элайджа Вуд",
-        "photo": "images/actor18.jpg"
-      },
-      {
-        "name": "Иэн Маккеллен",
-        "photo": "images/actor19.jpg"
-      }
-    ],
-    "description": "Фродо и его союзники начинают опасное путешествие, чтобы уничтожить Кольцо Всевластья."
-  }
-    ]
-  
-    function render(list) {
-      let html = '';
-      list.forEach(film => {
-        html += `
-        <div class="film-card">
-          <div class="flex">
-            <img src="${film.poster}">
-            <div>
-              <h2>${film.title} (${film.year})</h2>
-              <p><b>Жанр:</b> ${film.genre}</p>
-              <p><a href="film.html?id=${film.id}">Подробнее</a></p>
-            </div>
-          </div>
-        </div>`;
-      });
-      document.getElementById('films').innerHTML = html;
-    }
-  
-    render(data);
-  
-    document.getElementById('search').addEventListener('input', e => {
-      const q = e.target.value.toLowerCase();
-      const filtered = data.filter(f => f.title.toLowerCase().includes(q));
-      render(filtered);
-    });
-  </script>
-  
+  <footer class="site-footer">
+    <div class="footer-content">
+      <h3>О КиноМир</h3>
+      <p>КиноМир — ваш проводник в мир кинематографа! Откройте для себя лучшие фильмы, от классики до современных шедевров.</p>
+      <p>Контакт: <a href="mailto:info@kinomir.ru">info@kinomir.ru</a></p>
+    </div>
+  </footer>
+  <script src="./data.js"></script>
+  <script src="./script.js"></script>
 </body>
 </html>
