@@ -64,4 +64,4 @@ genreLinks.forEach(link => {
 });
 
 // Initial display
-displayMovies(movies);ы
+displayMovies(movies);
